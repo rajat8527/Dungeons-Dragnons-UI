@@ -1,8 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Select from 'react-select';
 import UserView from './UserView';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee ,faSpinner} from '@fortawesome/free-solid-svg-icons';
+
 
 class App extends React.Component {
   constructor(){
@@ -14,6 +16,7 @@ class App extends React.Component {
       races:[],
       equipments: [],
       finalObject :{},
+      serviceWait:false,
       showDetail:false
     }
   }
@@ -44,63 +47,38 @@ class App extends React.Component {
     this.setState({finalObject:obj})
   }
   callFinal(key,value){
- 
+    this.setState({serviceWait:true})
     fetch('https://rakuten-dnd.herokuapp.com/api/saveCharacterData', {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.state.finalObject),
+      body: JSON.stringify({
+        classes:this.state.selectedOptionClasses['value'],
+        races:this.state.selectedOptionRaces['value'],
+        age:this.state.age,
+        name:this.state.name
+      }),
     })
     .then((response) => response.json())
     .then((data) => {
       console.log('Success:', data);
+      this.setState({serviceWait:true})
       this.setState({showDetail:true})
     })
     .catch((error) => {
+      this.setState({serviceWait:true})
       console.error('Error:', error);
     });
   
 
   }
-  submit =() =>{
-    var finalObject =this.state.finalObject
-    var classObj;
-    var racesObj;
-    var equipmentObj;
-    fetch("http://www.dnd5eapi.co/api/classes/"+this.state.selectedOptionClasses['value']).then((response) =>{
-     return response.json()
-    }).then(data =>{
-      classObj = data
-       finalObject['classes'] = classObj;
-       this.setObj('classes',classObj)
-    })
-    fetch("http://www.dnd5eapi.co/api/races/"+this.state.selectedOptionRaces['value']).then((response) =>{
-      return response.json()
-    }).then(data =>{
-      racesObj = data
-      finalObject['races'] = racesObj;
-       this.setObj('races',racesObj)
-    })
-    fetch("http://www.dnd5eapi.co/api/equipment/"+this.state.selectedOptionEquipment['value']).then((response) =>{
-      return response.json()
-    }).then(data =>{
-      equipmentObj = data
-       finalObject['equipments'] = equipmentObj;
-      this.setObj('equipments',equipmentObj)
-    })
-     
-    finalObject['name'] = this.state.name;
-    finalObject['age']  = this.state.age;
-    var that = this
-    this.setState({finalObject:finalObject},() =>{
-     setTimeout(() =>{
-       that.callFinal()
-     },1000)
-    })
- 
 
-    console.log(finalObject)
+  
+  submit =() =>{
+    setTimeout(() =>{
+      this.callFinal()
+    },1000)
   }
 
   componentDidMount(){
@@ -146,47 +124,59 @@ class App extends React.Component {
   return (
     <div>
       {!this.state.showDetail?(<div className="App">
-    <label>
-          Name :
-          <input
+        <div class="w3-card w3-padding">
+        <div class="w3-row-padding">
+        <div class="w3-panel w3-round w3-highway-red w3-text-white">
+           <h3>Customize Your D&amp;D Character</h3>
+        </div>
+        </div>
+        <div class="w3-row-padding">
+           <div class="w3-col l6 s6 m6">
+        
+          <input class="w3-input w3-border"
+          placeholder = "Enter Character Name.."
             name="Name"
             type="text"
             checked={this.state.isGoing}
             onChange={this.handleChangeName} />
-        </label>
-        <br />
-        <label>
-          Age :
-          <input
+  
+           </div>
+           <div class="w3-col l6 s6 m6">
+        
+          <input class="w3-input w3-border"
+          placeholder="Enter Character Age..."
             name="Age"
             type="text"
             value={this.state.numberOfGuests}
             onChange={this.handleChangeAge} />
-        </label><br></br>
-        <label>
-           classes:
-         <Select
+      
+           </div>
+        </div>
+        <br/>
+        <div class="w3-row-padding">
+           <div class="w3-col l6 s6 m6">
+         <Select placeholder="Select Class"
          value={this.state.selectedOptionClasses}
          onChange={this.handleChangeClasses}
          options={this.state.classes}
        />
-       </label>
-       <label> races:
-         <Select
+           </div>
+           <div class="w3-col l6 s6 m6">
+         <Select placeholder="Select Race"
          value={this.state.selectedOptionRaces}
          onChange={this.handleChangeRaces}
          options={this.state.races}
        />
-       </label>
-       <label> Equipment:
-         <Select
-         value={this.state.selectedOptionEquipment}
-         onChange={this.handleChangeEquipment}
-         options={this.state.equipments}
-       />
-       </label>
-       <button onClick={this.submit}>Submit</button>
+           </div>
+        </div>
+        <br/>
+        <div class="w3-row">
+        <button  class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Create'}</button>
+        </div>
+        </div>
+       
     </div>):<UserView/>}
+
     </div>
     
   );
