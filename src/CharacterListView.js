@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import UserDetChailView from './CharacterDetailView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import CharacterDetailView from './CharacterDetailView';
@@ -76,7 +75,7 @@ class CharacterListView extends React.Component {
             return (
               <div className="w3-container">
                 <div className="w3-row">
-                  <button className="w3-button w3-bold w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                  <button className="w3-button w3-opacity w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
                 <br/>
                 <div className="w3-card">
