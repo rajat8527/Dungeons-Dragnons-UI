@@ -45,9 +45,11 @@ class App extends React.Component {
     obj[key] = value
     this.setState({finalObject:obj})
   }
+
+  baseUrl = 'https://cors-anywhere.herokuapp.com/';
   callFinal(key,value){
     this.setState({serviceWait:true})
-    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd-character-app.herokuapp.com/api/saveCharacterData', {
+    fetch(this.baseUrl+'https://rakuten-dnd-character-app.herokuapp.com/api/saveCharacterData', {
       method: 'POST', // or 'PUT'
       
       headers: {
@@ -85,11 +87,11 @@ class App extends React.Component {
 
   componentDidMount(){
     
-    fetch('https://cors-anywhere.herokuapp.com/https://www.dnd5eapi.co/api/classes').then((response) =>{
+    fetch(this.baseUrl+'https://www.dnd5eapi.co/api/classes').then((response) =>{
      return response.json()
     }).then((data) =>{
       let newArray = []
-      data.results.map(iter =>{
+      data.results.map(iter => {
         let obj = {}
         obj['value'] = iter.index;
         obj['label'] = iter.index;
@@ -97,7 +99,7 @@ class App extends React.Component {
       })
       this.setState({classes:newArray})
     })
-    fetch('https://cors-anywhere.herokuapp.com/https://www.dnd5eapi.co/api/races').then((response) =>{
+    fetch(this.baseUrl+'https://www.dnd5eapi.co/api/races').then((response) =>{
       return response.json()
      }).then((data) =>{
       let newArray = []
@@ -108,18 +110,6 @@ class App extends React.Component {
         newArray.push(obj)
       })
       this.setState({races:newArray})
-     })
-     fetch('https://cors-anywhere.herokuapp.com/https://www.dnd5eapi.co/api/equipment').then((response) =>{
-      return response.json()
-     }).then((data) =>{
-      let newArray = []
-      data.results.map(iter =>{
-        let obj = {}
-        obj['value'] = iter.index;
-        obj['label'] = iter.index;
-        newArray.push(obj)
-      })
-      this.setState({equipments:newArray})
      })
   }
   render(){
