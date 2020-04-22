@@ -52,7 +52,8 @@ class App extends React.Component {
       
       headers: {
         'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       },
       body: JSON.stringify({
         classes:this.state.selectedOptionClasses['value'],

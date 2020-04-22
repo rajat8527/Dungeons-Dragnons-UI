@@ -25,7 +25,8 @@ class UserView extends React.Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       },
     })
     .then((response) => response.json())
@@ -50,7 +51,8 @@ class UserView extends React.Component {
   componentDidMount() {
     fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd.herokuapp.com/api/getCharacterData',{
       headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       }
     }).then(data => {
       return data.json()
