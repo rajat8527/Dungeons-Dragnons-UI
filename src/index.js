@@ -17,7 +17,7 @@ ReactDOM.render(
        <Route exact path="/">
              <App/>
           </Route>
-         <Route exact path="/userView">
+         <Route exact path="/CharacterListView">
          <CharacterListView/>
          </Route>
        </Switch>

@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import Select from 'react-select';
-import UserView from './UserView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner} from '@fortawesome/free-solid-svg-icons';
+import CharacterListView from './CharacterListView';
 
 
 class App extends React.Component {
@@ -178,7 +178,7 @@ class App extends React.Component {
         </div>
         </div>
        
-    </div>):<UserView/>}
+    </div>):<CharacterListView/>}
 
     </div>
     
