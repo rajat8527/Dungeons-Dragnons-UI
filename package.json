@@ -1,5 +1,6 @@
 {
   "name": "my-app",
+  "homepage": "https://rakuten-dnd-ui.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

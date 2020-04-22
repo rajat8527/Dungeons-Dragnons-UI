@@ -3,7 +3,7 @@ import './App.css';
 import Select from 'react-select';
 import UserView from './UserView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee ,faSpinner} from '@fortawesome/free-solid-svg-icons';
+import { faSpinner} from '@fortawesome/free-solid-svg-icons';
 
 
 class App extends React.Component {
