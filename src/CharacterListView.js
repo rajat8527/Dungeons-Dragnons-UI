@@ -31,10 +31,7 @@ class CharacterListView extends React.Component {
         'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       },
     })
-      .then((response) => response.json())
-      .then(() => {
-        history.push("/CharacterListView")
-      })
+      .then(() => this.setState({data:[],flag:true}))
       .catch((error) => {
         this.setState({ serviceWait: false })
         console.error('Error:', error);
