@@ -13,15 +13,15 @@ import CharacterListView from './CharacterListView';
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-       <Switch>
-       <Route exact path="/">
-             <App/>
-          </Route>
-         <Route exact path="/CharacterListView">
-         <CharacterListView/>
-         </Route>
-       </Switch>
-   </Router>
+      <Switch>
+        <Route exact path="/">
+          <App />
+        </Route>
+        <Route exact path="/CharacterListView">
+          <CharacterListView />
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
