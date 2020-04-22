@@ -50,6 +50,7 @@ class App extends React.Component {
     this.setState({serviceWait:true})
     fetch('https://rakuten-dnd.herokuapp.com/api/saveCharacterData', {
       method: 'POST', // or 'PUT'
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -82,7 +83,9 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://www.dnd5eapi.co/api/classes').then((response) =>{
+    fetch('http://www.dnd5eapi.co/api/classes',{
+      mode: 'no-cors',
+    }).then((response) =>{
      return response.json()
     }).then((data) =>{
       let newArray = []
@@ -94,7 +97,9 @@ class App extends React.Component {
       })
       this.setState({classes:newArray})
     })
-    fetch('http://www.dnd5eapi.co/api/races').then((response) =>{
+    fetch('http://www.dnd5eapi.co/api/races',{
+      mode: 'no-cors',
+    }).then((response) =>{
       return response.json()
      }).then((data) =>{
       let newArray = []
@@ -105,18 +110,6 @@ class App extends React.Component {
         newArray.push(obj)
       })
       this.setState({races:newArray})
-     })
-     fetch('http://www.dnd5eapi.co/api/equipment').then((response) =>{
-      return response.json()
-     }).then((data) =>{
-      let newArray = []
-      data.results.map(iter =>{
-        let obj = {}
-        obj['value'] = iter.index;
-        obj['label'] = iter.index;
-        newArray.push(obj)
-      })
-      this.setState({equipments:newArray})
      })
   }
   render(){
