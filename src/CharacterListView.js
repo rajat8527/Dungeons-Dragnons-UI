@@ -100,7 +100,7 @@ class CharacterListView extends React.Component {
                           <h6>Class : {iter.classes}</h6>
                         </div>
                         <div className="w3-col w3-padding l4">
-                          <button className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
+                          <button onClick ={() =>{this.dataTransferview(iter)}} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
                         </div>
                         <div className="w3-col l4"></div>
                       </div>
