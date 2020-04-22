@@ -52,6 +52,7 @@ class App extends React.Component {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify({
         classes:this.state.selectedOptionClasses['value'],

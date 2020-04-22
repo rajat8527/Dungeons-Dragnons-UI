@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import UserDetailView from './userDetailView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -25,6 +25,7 @@ class UserView extends React.Component {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       },
     })
     .then((response) => response.json())
@@ -47,7 +48,13 @@ class UserView extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://rakuten-dnd.herokuapp.com/api/getCharacterData').then(data => {
+    fetch('https://rakuten-dnd.herokuapp.com/api/getCharacterData',{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+    }).then(data => {
       return data.json()
     }).then(response => {
       if(response.length>0){
