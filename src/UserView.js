@@ -31,11 +31,10 @@ class UserView extends React.Component {
     })
     .then((response) => response.json())
     .then(() => {
-      this.setState({serviceWait:true})
-      this.setState({showDetail:true})
+      this.setState({data:[],serviceWait:false})
     })
     .catch((error) => {
-      this.setState({serviceWait:true})
+      this.setState({serviceWait:false})
       console.error('Error:', error);
     });
   
@@ -79,8 +78,8 @@ class UserView extends React.Component {
           {this.state.data.length > 0 ? this.state.data.reverse().map((iter, index) => {
             return (
               <div className="w3-container">
-                <div className="w3-row">
-                  <button className="w3-button w3-highway-red w3-round w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                <div className="w3-row-padding">
+                  <button className="w3-button w3-highway-red w3-round-xxlarge w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
                 <div className="w3-card">
                   <div className="w3-row">
