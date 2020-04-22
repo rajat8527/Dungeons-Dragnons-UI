@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import history from './history.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,12 +12,12 @@ import CharacterListView from './CharacterListView';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={history}>
+    <Router>
       <Switch>
         <Route exact path="/">
           <App />
         </Route>
-        <Route path="/CharacterListView">
+        <Route exact path="/CharacterListView">
           <CharacterListView />
         </Route>
       </Switch>

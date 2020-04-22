@@ -3,7 +3,6 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import CharacterDetailView from './CharacterDetailView';
-import history from './history.js';
 
 
 class CharacterListView extends React.Component {
@@ -23,7 +22,7 @@ class CharacterListView extends React.Component {
 
   callFinal(key, value) {
     this.setState({ serviceWait: true })
-    fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteAllData', {
+    fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteAllCharacters', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -64,6 +63,22 @@ class CharacterListView extends React.Component {
     this.setState({ dataObj: data, showMoreDetail: true })
   }
 
+deleteCharacterById(_id){
+  this.setState({ serviceWait: true })
+  fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+_id, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
+    },
+  })
+    .then(() => this.setState({data:[],flag:true}))
+    .catch((error) => {
+      this.setState({ serviceWait: false })
+      console.error('Error:', error);
+    });
+}
   render() {
     console.log(this.state.data)
     return (
@@ -100,8 +115,9 @@ class CharacterListView extends React.Component {
                         <div className="w3-col l4">
                           <h6>Class : {iter.classes}</h6>
                         </div>
-                        <div className="w3-col w3-padding l4">
+                        <div className="w3-col w3-padding l4 w3-bar">
                           <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
+                          <button onClick={() => { this.deleteCharacterById(iter._id) }} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>Delete</b></button>
                         </div>
                         <div className="w3-col l4"></div>
                       </div>
