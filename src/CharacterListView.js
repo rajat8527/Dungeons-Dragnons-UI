@@ -124,7 +124,7 @@ class CharacterListView extends React.Component {
                         <div className="w3-col w3-padding l4 w3-right">
                           <div className="w3-bar">
                             <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
-                            <button onClick={() => { this.deleteCharacterById(iter._id,index) }} className="delete-button w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" >{this.state.loadDeleteById ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Delete'}</button>
+                            <button onClick={() => { this.deleteCharacterById(iter._id,index) }} className="delete-button w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>Delete</b></button>
                           </div>
                         </div>
                       </div>
