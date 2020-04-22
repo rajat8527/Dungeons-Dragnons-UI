@@ -63,7 +63,10 @@ class CharacterListView extends React.Component {
     this.setState({ dataObj: data, showMoreDetail: true })
   }
 
-deleteCharacterById(_id){
+deleteCharacterById(_id, index){
+
+  var newData = this.state.data
+  newData.splice(index,1)
   this.setState({ serviceWait: true })
   fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+_id, {
     method: 'DELETE',
@@ -73,7 +76,7 @@ deleteCharacterById(_id){
       'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
     },
   })
-    .then(() => this.setState({data:[],flag:true}))
+    .then(() => this.setState({data:newData,flag:true}))
     .catch((error) => {
       this.setState({ serviceWait: false })
       console.error('Error:', error);
@@ -115,11 +118,11 @@ deleteCharacterById(_id){
                         <div className="w3-col l4">
                           <h6>Class : {iter.classes}</h6>
                         </div>
-                        <div className="w3-col w3-padding l4 w3-bar">
-                          <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
-                          <button onClick={() => { this.deleteCharacterById(iter._id) }} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>Delete</b></button>
-                        </div>
                         <div className="w3-col l4"></div>
+                        <div className="w3-col w3-padding l4 w3-bar w3-right">
+                          <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
+                          <button onClick={() => { this.deleteCharacterById(iter._id,index) }} className="w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>Delete</b></button>
+                        </div>
                       </div>
                     </div>
                   </div>
