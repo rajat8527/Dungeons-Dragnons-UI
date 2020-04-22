@@ -6,13 +6,14 @@ import * as serviceWorker from './serviceWorker';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  useHistory
 } from "react-router-dom";
 import CharacterListView from './CharacterListView';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router history={useHistory}>
       <Switch>
         <Route exact path="/">
           <App />
