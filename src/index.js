@@ -6,10 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-import UserView from './UserView';
+import CharacterListView from './CharacterListView';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +18,7 @@ ReactDOM.render(
              <App/>
           </Route>
          <Route exact path="/userView">
-         <UserView/>
+         <CharacterListView/>
          </Route>
        </Switch>
    </Router>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import UserDetailView from './CharacterDetailView';
+import UserDetChailView from './CharacterDetailView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import CharacterDetailView from './CharacterDetailView';
@@ -38,17 +38,10 @@ class CharacterListView extends React.Component {
       this.setState({serviceWait:false})
       console.error('Error:', error);
     });
-  
-
+    this.fetchCharacter()
   }
 
-  submit =() =>{
-    setTimeout(() =>{
-      this.callFinal()
-    },1000)
-  }
-
-  componentDidMount() {
+  fetchCharacter(){
     fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd-character-app.herokuapp.com/api/getCharacterData',{
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
@@ -66,6 +59,10 @@ class CharacterListView extends React.Component {
      
     })
   }
+
+  componentDidMount() {
+   this.fetchCharacter()
+  }
   dataTransferview(data) {
     this.setState({ dataObj: data, showMoreDetail: true })
   }
@@ -79,7 +76,7 @@ class CharacterListView extends React.Component {
             return (
               <div className="w3-container">
                 <div className="w3-row">
-                  <button className="w3-button w3-bold w3-highway-red w3-round-xxlarge w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                  <button className="w3-button w3-bold w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
                 <br/>
                 <div className="w3-card">
