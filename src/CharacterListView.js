@@ -14,13 +14,13 @@ class CharacterListView extends React.Component {
       moreInfo: true,
       dataObj: {},
       showMoreDetail: false,
-      flag1: false
+      flag: false
     }
   }
 
   baseUrl = 'https://cors-anywhere.herokuapp.com/';
 
-  callFinal(key, value) {
+  deleteAllCharacters() {
     this.setState({ loadDeleteAll: true })
     fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteAllCharacters', {
       method: 'DELETE',
@@ -33,6 +33,26 @@ class CharacterListView extends React.Component {
       .then(() => this.setState({data:[],flag:true}))
       .catch((error) => {
         this.setState({ loadDeleteAll: false })
+        console.error('Error:', error);
+      });
+  }
+
+  deleteCharacterById(_id, index){
+
+    var newData = this.state.data
+    newData.splice(index,1)
+    this.setState({ loadDeleteById: true })
+    fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+_id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
+      },
+    })
+      .then(() => this.setState({data:newData,flag:true}))
+      .catch((error) => {
+        this.setState({ loadDeleteById: false })
         console.error('Error:', error);
       });
   }
@@ -63,25 +83,7 @@ class CharacterListView extends React.Component {
     this.setState({ dataObj: data, showMoreDetail: true })
   }
 
-deleteCharacterById(_id, index){
 
-  var newData = this.state.data
-  newData.splice(index,1)
-  this.setState({ loadDeleteById: true })
-  fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+_id, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
-    },
-  })
-    .then(() => this.setState({data:newData,flag:true}))
-    .catch((error) => {
-      this.setState({ loadDeleteById: false })
-      console.error('Error:', error);
-    });
-}
   render() {
     console.log(this.state.data)
     return (
@@ -89,7 +91,7 @@ deleteCharacterById(_id, index){
         <div className="parent">
          {this.state.data.length>0? <div className="w3-container">
           <div className="w3-row">
-                  <button className="w3-button delete-button w3-highway-red w3-hover-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.loadDeleteAll ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Delete All Characters'}</button>
+                  <button className="w3-button delete-button w3-highway-red w3-hover-red w3-round-xxlarge w3-right" onClick={() => this.deleteAllCharacters()}>{this.state.loadDeleteAll ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Delete All Characters'}</button>
                 </div>
           </div>
       :''}
@@ -119,9 +121,11 @@ deleteCharacterById(_id, index){
                           <h6>Class : {iter.classes}</h6>
                         </div>
                         <div className="w3-col l4"></div>
-                        <div className="w3-col w3-padding l4 w3-bar w3-right">
-                          <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
-                          <button onClick={() => { this.deleteCharacterById(iter._id,index) }} className="delete-button w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" >{this.state.loadDeleteById ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Delete'}</button>
+                        <div className="w3-col w3-padding l4 w3-right">
+                          <div className="w3-bar">
+                            <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
+                            <button onClick={() => { this.deleteCharacterById(iter._id,index) }} className="delete-button w3-button w3-padding w3-round-xxlarge w3-highway-red w3-hover-red" >{this.state.loadDeleteById ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Delete'}</button>
+                          </div>
                         </div>
                       </div>
                     </div>
