@@ -51,7 +51,8 @@ class App extends React.Component {
       method: 'POST', // or 'PUT'
       
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
       },
       body: JSON.stringify({
         classes:this.state.selectedOptionClasses['value'],
