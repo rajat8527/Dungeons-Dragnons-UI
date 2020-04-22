@@ -21,7 +21,7 @@ class UserView extends React.Component {
 
   callFinal(key,value){
     this.setState({serviceWait:true})
-    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd.herokuapp.com/api/deleteAllData', {
+    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd-character-app.herokuapp.com/api/deleteAllData', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ class UserView extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd.herokuapp.com/api/getCharacterData',{
+    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd-character-app.herokuapp.com/api/getCharacterData',{
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
