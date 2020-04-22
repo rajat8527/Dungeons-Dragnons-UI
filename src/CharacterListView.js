@@ -3,7 +3,7 @@ import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import CharacterDetailView from './CharacterDetailView';
-
+import { useHistory } from 'react-router-dom';
 
 
 class CharacterListView extends React.Component {
@@ -39,7 +39,8 @@ class CharacterListView extends React.Component {
         this.setState({ serviceWait: false })
         console.error('Error:', error);
       });
-    window.location.reload(false);
+      const history = useHistory()
+      history.goBack()
   }
 
   fetchCharacter() {
