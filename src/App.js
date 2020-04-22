@@ -85,7 +85,7 @@ class App extends React.Component {
   
     fetch('https://rakuten-cors.herokuapp.com',{
       headers: {
-          'Target-Endpoint': 'http://www.dnd5eapi.co/api/classes'
+          'Target-Endpoint': 'https://www.dnd5eapi.co/api/classes'
       }
     }).then((response) =>{
      return response.json()
@@ -99,7 +99,11 @@ class App extends React.Component {
       })
       this.setState({classes:newArray})
     })
-    fetch('http://www.dnd5eapi.co/api/races').then((response) =>{
+    fetch('https://rakuten-cors.herokuapp.com',{
+      headers: {
+          'Target-Endpoint': 'https://www.dnd5eapi.co/api/races'
+      }
+    }).then((response) =>{
       return response.json()
      }).then((data) =>{
       let newArray = []
@@ -111,7 +115,11 @@ class App extends React.Component {
       })
       this.setState({races:newArray})
      })
-     fetch('http://www.dnd5eapi.co/api/equipment').then((response) =>{
+     fetch('https://rakuten-cors.herokuapp.com',{
+      headers: {
+          'Target-Endpoint': 'https://www.dnd5eapi.co/api/equipment'
+      }
+    }).then((response) =>{
       return response.json()
      }).then((data) =>{
       let newArray = []
