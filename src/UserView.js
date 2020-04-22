@@ -18,6 +18,34 @@ class UserView extends React.Component {
       flag:false
     }
   }
+
+  callFinal(key,value){
+    this.setState({serviceWait:true})
+    fetch('https://rakuten-dnd.herokuapp.com/api/deleteAllData', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => response.json())
+    .then(() => {
+      this.setState({serviceWait:true})
+      this.setState({showDetail:true})
+    })
+    .catch((error) => {
+      this.setState({serviceWait:true})
+      console.error('Error:', error);
+    });
+  
+
+  }
+
+  submit =() =>{
+    setTimeout(() =>{
+      this.callFinal()
+    },1000)
+  }
+
   componentDidMount() {
     fetch('https://rakuten-dnd.herokuapp.com/api/getCharacterData').then(data => {
       return data.json()
@@ -44,10 +72,13 @@ class UserView extends React.Component {
           {this.state.data.length > 0 ? this.state.data.reverse().map((iter, index) => {
             return (
               <div className="w3-container">
+                <div className="w3-row">
+                  <button className="w3-button w3-highway-red w3-round w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                </div>
                 <div className="w3-card">
                   <div className="w3-row">
                     <div className="w3-col l3">
-                      <img className="char-img" src={require(`${iter.imageUrl}`)} />
+                      <img alt="notfound" className="char-img" src={require(`${iter.imageUrl}`)} />
                     </div>
                     <div className="w3-col l9 w3-center">
                       <div className="w3-row">
@@ -66,7 +97,7 @@ class UserView extends React.Component {
                           <h6>Class : {iter.classes}</h6>
                         </div>
                         <div className="w3-col w3-padding l4">
-                          <button onClick={() => { this.dataTransferview(iter) }} className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red"><b>More Info</b></button>
+                          <button className="w3-button w3-round-xxlarge w3-highway-red w3-hover-red" ><b>More Info</b></button>
                         </div>
                         <div className="w3-col l4"></div>
                       </div>
