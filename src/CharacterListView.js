@@ -75,7 +75,7 @@ class CharacterListView extends React.Component {
             return (
               <div className="w3-container">
                 <div className="w3-row">
-                  <button className="w3-button w3-opacity w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                  <button className="w3-button delete-button w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
                 <br/>
                 <div className="w3-card">
