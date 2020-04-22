@@ -47,7 +47,7 @@ class App extends React.Component {
   }
   callFinal(key,value){
     this.setState({serviceWait:true})
-    fetch('https://rakuten-dnd.herokuapp.com/api/saveCharacterData', {
+    fetch('https://cors-anywhere.herokuapp.com/https://rakuten-dnd.herokuapp.com/api/saveCharacterData', {
       method: 'POST', // or 'PUT'
       
       headers: {
