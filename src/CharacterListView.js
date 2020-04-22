@@ -37,7 +37,7 @@ class CharacterListView extends React.Component {
       this.setState({serviceWait:false})
       console.error('Error:', error);
     });
-    this.fetchCharacter()
+    window.location.reload(false);
   }
 
   fetchCharacter(){
@@ -75,7 +75,7 @@ class CharacterListView extends React.Component {
             return (
               <div className="w3-container">
                 <div className="w3-row">
-                  <button className="w3-button delete-button w3-highway-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                  <button className="w3-button delete-button w3-highway-red w3-hover-red w3-round-xxlarge w3-right" onClick={() => this.callFinal()}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
                 <br/>
                 <div className="w3-card">
