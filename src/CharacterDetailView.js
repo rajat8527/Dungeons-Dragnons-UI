@@ -3,7 +3,7 @@ import './App.css';
 
 
 
-class UserDetailView extends React.Component{
+class CharacterDetailView extends React.Component{
     constructor(props){
         super(props);
         this.state ={
@@ -21,12 +21,12 @@ class UserDetailView extends React.Component{
    
        return(<div className="w3-container w3-card w3-padding">
            <div className="w3-row-padding">
-            <a href="/userView" className="w3-button w3-highway-red w3-hover-red"><i className="fa fa-arrow-left"></i></a>
+            <a href="/CharaterListView" className="w3-button w3-highway-red w3-hover-red"><i className="fa fa-arrow-left"></i></a>
            </div>
            <br/>
            <div className="w3-row-padding">
              <div className="w3-col l4">
-              <img className="char-img" src={ require(`${data.imageUrl}`) } />
+              <img alt="noimage" className="char-img" src={ require(`${data.imageUrl}`) } />
              </div>
              <div className="w3-col l8 w3-center">
              <div className="w3-row">
@@ -117,4 +117,4 @@ class UserDetailView extends React.Component{
     }
 }
 
-export default UserDetailView;
+export default CharacterDetailView;

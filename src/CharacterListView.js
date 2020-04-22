@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
-import UserDetailView from './userDetailView';
+import UserDetailView from './CharacterDetailView';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import CharacterDetailView from './CharacterDetailView';
 
 
 
-class UserView extends React.Component {
+class CharacterListView extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -70,7 +71,6 @@ class UserView extends React.Component {
   }
 
   render() {
-    var moreInfoclass = this.state.moreInfo ? "w3-modal" : "moreInfo"
     console.log(this.state.data)
     return (
       <div>{!this.state.showMoreDetail ? (
@@ -78,9 +78,10 @@ class UserView extends React.Component {
           {this.state.data.length > 0 ? this.state.data.reverse().map((iter, index) => {
             return (
               <div className="w3-container">
-                <div className="w3-row-padding">
-                  <button className="w3-button w3-highway-red w3-round-xxlarge w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
+                <div className="w3-row">
+                  <button className="w3-button w3-bold w3-highway-red w3-round-xxlarge w3-right" onClick={this.submit}>{this.state.serviceWait?<FontAwesomeIcon spin icon={faSpinner} />:'Delete All Characters'}</button>
                 </div>
+                <br/>
                 <div className="w3-card">
                   <div className="w3-row">
                     <div className="w3-col l3">
@@ -114,11 +115,11 @@ class UserView extends React.Component {
               </div>
             );
           }) : (this.state.flag?<div className="w3-center w3-panel w3-highway-red w3-padding"><h5><b>No Characters Found, Please create one !</b></h5></div>:<div className="w3-center"><FontAwesomeIcon className="w3-xxlarge w3-center" spin icon={faSpinner} /></div>)}
-        </div>) : <UserDetailView dataUser={this.state.dataObj} />}
+        </div>) : <CharacterDetailView dataUser={this.state.dataObj} />}
 
       </div>
     )
   }
 }
 
-export default UserView;
+export default CharacterListView;
