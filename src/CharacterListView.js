@@ -34,12 +34,12 @@ class CharacterListView extends React.Component {
       .then((response) => response.json())
       .then(() => {
         this.setState({ data: [], serviceWait: false })
+        history.push("/CharacterListView")
       })
       .catch((error) => {
         this.setState({ serviceWait: false })
         console.error('Error:', error);
       });
-      history.push("/CharacterListView")
   }
 
   fetchCharacter() {
