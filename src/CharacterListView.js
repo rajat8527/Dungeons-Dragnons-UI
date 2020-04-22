@@ -40,7 +40,7 @@ class CharacterListView extends React.Component {
         console.error('Error:', error);
       });
       const history = useHistory()
-      history.goBack()
+      history.push("/CharacterListView")
   }
 
   fetchCharacter() {
