@@ -21,7 +21,7 @@ class CharacterDetailView extends React.Component{
    
        return(<div className="w3-container w3-card w3-padding">
            <div className="w3-row-padding">
-            <a href="/CharaterListView" className="w3-button w3-highway-red w3-hover-red"><i className="fa fa-arrow-left"></i></a>
+            <a href="/CharacterListView" className="w3-button w3-highway-red w3-hover-red"><i className="fa fa-arrow-left"></i></a>
            </div>
            <br/>
            <div className="w3-row-padding">
