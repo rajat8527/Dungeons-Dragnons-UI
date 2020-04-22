@@ -24,8 +24,7 @@ class UserView extends React.Component {
     fetch('https://rakuten-dnd.herokuapp.com/api/deleteAllData', {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
     })
     .then((response) => response.json())
@@ -48,13 +47,7 @@ class UserView extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://rakuten-dnd.herokuapp.com/api/getCharacterData',{
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-    }).then(data => {
+    fetch('https://rakuten-dnd.herokuapp.com/api/getCharacterData').then(data => {
       return data.json()
     }).then(response => {
       if(response.length>0){

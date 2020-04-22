@@ -51,8 +51,7 @@ class App extends React.Component {
     fetch('https://rakuten-dnd.herokuapp.com/api/saveCharacterData', {
       method: 'POST', // or 'PUT'
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         classes:this.state.selectedOptionClasses['value'],
