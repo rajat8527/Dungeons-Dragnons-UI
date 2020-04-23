@@ -18,7 +18,8 @@ class App extends React.Component {
       finalObject: {},
       buttonFlag:false,
       serviceWait: false,
-      showDetail: false
+      showDetail: false,
+      errorMessage: ''
     }
   }
   handleChangeClasses = selectedOption => {
@@ -66,15 +67,19 @@ class App extends React.Component {
       }),
     })
       .then((response) => {
-        response.json()})
+        response.json()
+      })
       .then((data) => {
         console.log('Success:', data);
         this.setState({ serviceWait: true })
         this.setState({ showDetail: true })
       })
       .catch((error) => {
-        this.setState({ serviceWait: true })
-        console.error('Error:', error);
+        let errorNames = '';
+        error.errors.map(iter => {
+          errorNames = iter.field + ', ' + errorNames;
+        })
+        this.setState({errorMessage: errorNames + ' is required'});
       });
   }
 
@@ -165,6 +170,8 @@ class App extends React.Component {
             <br />
             <div class="w3-row">
               <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
+              { this.state.errorMessage &&
+                 <h5 className="w3-panel w3-text-white w3-padding w3-red"> { this.state.errorMessage } </h5> }
             </div>
           </div>
 
