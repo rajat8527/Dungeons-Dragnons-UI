@@ -84,7 +84,8 @@ class App extends React.Component {
             if (res.code === 'ValidationFailed') {
               console.log(res.fieldMessages)
             } else {
-             this.setState({errorMessage: 'all fields are required, please check if you missed any !'});
+              this.setState({ serviceWait: false })
+             this.setState({errorMessage: 'All fields are required, please check if you missed any !'});
               console.log('this is a client (probably invalid JSON) error, but also might be a server error (bad JSON parsing/validation)')
             }
             break
@@ -190,7 +191,7 @@ class App extends React.Component {
             <div class="w3-row">
               <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
               { this.state.errorMessage &&
-                 <h5 className="w3-panel w3-text-white w3-padding w3-red"> { this.state.errorMessage } </h5> }
+                 <h5 className="w3-panel w3-text-white w3-padding w3-highway-red w3-round"> { this.state.errorMessage } </h5> }
             </div>
           </div>
 
