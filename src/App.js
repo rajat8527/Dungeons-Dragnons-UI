@@ -172,7 +172,7 @@ class App extends React.Component {
             <br />
             <div class="w3-row">
               <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
-              { this.state.hasError &&
+              { !this.state.hasError && this.state.errorMessage &&
                  <h5 className="w3-panel w3-text-white w3-padding w3-red"> { this.state.errorMessage } </h5> }
             </div>
           </div>
