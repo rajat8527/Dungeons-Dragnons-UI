@@ -123,7 +123,6 @@ class App extends React.Component {
                 <h3>Customize Your D&amp;D Character</h3>
               </div>
             </div>
-            <form onSubmit={this.submit}>
             <div class="w3-row-padding">
               <div class="w3-col l6 s6 m6">
 
@@ -132,9 +131,7 @@ class App extends React.Component {
                   name="Name"
                   type="text"
                   checked={this.state.isGoing}
-                  onChange={this.handleChangeName} 
-                  required
-                  />
+                  onChange={this.handleChangeName} />
 
               </div>
               <div class="w3-col l6 s6 m6">
@@ -144,9 +141,8 @@ class App extends React.Component {
                   name="Age"
                   type="text"
                   value={this.state.numberOfGuests}
-                  onChange={this.handleChangeAge} 
-                  required
-                  />
+                  onChange={this.handleChangeAge} />
+
               </div>
             </div>
             <br />
@@ -156,7 +152,6 @@ class App extends React.Component {
                   value={this.state.selectedOptionClasses}
                   onChange={this.handleChangeClasses}
                   options={this.state.classes}
-                  required
                 />
               </div>
               <div class="w3-col l6 s6 m6">
@@ -164,14 +159,12 @@ class App extends React.Component {
                   value={this.state.selectedOptionRaces}
                   onChange={this.handleChangeRaces}
                   options={this.state.races}
-                  required
                 />
               </div>
             </div>
-            </form>
             <br />
             <div class="w3-row">
-              <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" type="submit">{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
+              <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
             </div>
           </div>
 
