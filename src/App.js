@@ -60,10 +60,10 @@ class App extends React.Component {
         'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       },
       body: JSON.stringify({
-        classes: this.state.selectedOptionClasses['value'],
-        races: this.state.selectedOptionRaces['value'],
-        age: this.state.age,
-        name: this.state.name
+        classes: this.state.selectedOptionClasses['value']?this.state.selectedOptionClasses['value']:"",
+        races: this.state.selectedOptionRaces['value']? this.state.selectedOptionRaces['value']:"",
+        age: this.state.age?this.state.age:"",
+        name: this.state.name?this.state.name:""
       }),
     })
       .then((response) => {
