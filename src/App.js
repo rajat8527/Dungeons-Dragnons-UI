@@ -53,6 +53,7 @@ class App extends React.Component {
   baseUrl = 'https://cors-anywhere.herokuapp.com/';
   saveCharacterData() {
     this.setState({ serviceWait: true })
+    let resStatus = 0
     fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/saveCharacterData', {
       method: 'POST',
       headers: {
@@ -67,21 +68,44 @@ class App extends React.Component {
         name: this.state.name?this.state.name:""
       }),
     })
-      .then((response) => {
-        if(response.ok){
-          response.json()
-          this.setState({hasError: false})
-        this.setState({ serviceWait: true })
-        this.setState({ showDetail: true })
+      .then(res => {
+        resStatus = res.status
+        return res.json()
+      })
+      .then(res => {
+        switch (resStatus) {
+          case 200:
+            console.log('success')
+            this.setState({hasError: false})
+            this.setState({ serviceWait: true })
+            this.setState({ showDetail: true })
+            break
+          case 400:
+            if (res.code === 'ValidationFailed') {
+              // My custom error messages from the API.
+              console.log(res.fieldMessages)
+            } else {
+              console.log('this is a client (probably invalid JSON) error, but also might be a server error (bad JSON parsing/validation)')
+            }
+            break
+          case 500:
+            console.log('server error, try again')
+            break
+          default:
+            console.log('unhandled')
+            break
         }
       })
-      .catch(error => {
-        let errorNames = '';
-        error.errors.map(iter => {
-          errorNames = iter.field + ', ' + errorNames;
-        })
-        this.setState({errorMessage: errorNames + ' is required'});
+      .catch(err => {
+        console.error(err)
       })
+      // .catch(error => {
+      //   let errorNames = '';
+      //   error.errors.map(iter => {
+      //     errorNames = iter.field + ', ' + errorNames;
+      //   })
+      //   this.setState({errorMessage: errorNames + ' is required'});
+      // })
       
   }
 
