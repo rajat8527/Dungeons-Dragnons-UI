@@ -19,7 +19,8 @@ class App extends React.Component {
       buttonFlag:false,
       serviceWait: false,
       showDetail: false,
-      errorMessage: ''
+      errorMessage: '',
+      hasError: true
     }
   }
   handleChangeClasses = selectedOption => {
@@ -69,6 +70,7 @@ class App extends React.Component {
       .then((response) => {
         if(response.ok){
           response.json()
+          this.setState({hasError: false})
         this.setState({ serviceWait: true })
         this.setState({ showDetail: true })
         }
@@ -79,7 +81,7 @@ class App extends React.Component {
           errorNames = iter.field + ', ' + errorNames;
         })
         this.setState({errorMessage: errorNames + ' is required'});
-      });
+      })
       
   }
 
@@ -170,7 +172,7 @@ class App extends React.Component {
             <br />
             <div class="w3-row">
               <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
-              { this.state.errorMessage &&
+              { this.state.hasError &&
                  <h5 className="w3-panel w3-text-white w3-padding w3-red"> { this.state.errorMessage } </h5> }
             </div>
           </div>
