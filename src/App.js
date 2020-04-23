@@ -67,19 +67,18 @@ class App extends React.Component {
       }),
     })
       .then((response) => {
-        response.json()
+        if(response.ok){
+          response.json()
+        this.setState({ serviceWait: true })
+        this.setState({ showDetail: true })
+        }
       })
-      .catch((error) => {
+      .catch(error => {
         let errorNames = '';
         error.errors.map(iter => {
           errorNames = iter.field + ', ' + errorNames;
         })
         this.setState({errorMessage: errorNames + ' is required'});
-      })
-      .then((data) => {
-        console.log('Success:', data);
-        this.setState({ serviceWait: true })
-        this.setState({ showDetail: true })
       });
       
   }
