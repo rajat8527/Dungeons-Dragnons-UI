@@ -52,6 +52,7 @@ class App extends React.Component {
 
   baseUrl = 'https://cors-anywhere.herokuapp.com/';
   saveCharacterData() {
+    this.setState({errorMessage: ''});
     this.setState({ serviceWait: true })
     let resStatus = 0
     fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/saveCharacterData', {
