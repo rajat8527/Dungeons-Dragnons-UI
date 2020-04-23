@@ -131,7 +131,7 @@ class App extends React.Component {
                   name="Name"
                   type="text"
                   checked={this.state.isGoing}
-                  onChange={this.handleChangeName} />
+                  onChange={this.handleChangeName} required/>
 
               </div>
               <div class="w3-col l6 s6 m6">
@@ -141,7 +141,7 @@ class App extends React.Component {
                   name="Age"
                   type="text"
                   value={this.state.numberOfGuests}
-                  onChange={this.handleChangeAge} />
+                  onChange={this.handleChangeAge} required/>
 
               </div>
             </div>
@@ -152,6 +152,7 @@ class App extends React.Component {
                   value={this.state.selectedOptionClasses}
                   onChange={this.handleChangeClasses}
                   options={this.state.classes}
+                  required
                 />
               </div>
               <div class="w3-col l6 s6 m6">
@@ -159,6 +160,7 @@ class App extends React.Component {
                   value={this.state.selectedOptionRaces}
                   onChange={this.handleChangeRaces}
                   options={this.state.races}
+                  required
                 />
               </div>
             </div>
