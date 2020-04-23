@@ -16,11 +16,13 @@ class App extends React.Component {
       races: [],
       equipments: [],
       finalObject: {},
+      buttonFlag:false,
       serviceWait: false,
       showDetail: false
     }
   }
   handleChangeClasses = selectedOption => {
+    
     this.setState({ selectedOptionClasses: selectedOption });
     console.log(`Option selected:`, selectedOption);
   };
@@ -47,11 +49,10 @@ class App extends React.Component {
   }
 
   baseUrl = 'https://cors-anywhere.herokuapp.com/';
-  callFinal(key, value) {
+  saveCharacterData() {
     this.setState({ serviceWait: true })
     fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/saveCharacterData', {
-      method: 'POST', // or 'PUT'
-
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
@@ -64,7 +65,8 @@ class App extends React.Component {
         name: this.state.name
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.json()})
       .then((data) => {
         console.log('Success:', data);
         this.setState({ serviceWait: true })
@@ -74,14 +76,12 @@ class App extends React.Component {
         this.setState({ serviceWait: true })
         console.error('Error:', error);
       });
-
-
   }
 
 
   submit = () => {
     setTimeout(() => {
-      this.callFinal()
+      this.saveCharacterData()
     }, 1000)
   }
 
@@ -123,6 +123,7 @@ class App extends React.Component {
                 <h3>Customize Your D&amp;D Character</h3>
               </div>
             </div>
+            <form onClick={this.submit}>
             <div class="w3-row-padding">
               <div class="w3-col l6 s6 m6">
 
@@ -131,7 +132,9 @@ class App extends React.Component {
                   name="Name"
                   type="text"
                   checked={this.state.isGoing}
-                  onChange={this.handleChangeName} required/>
+                  onChange={this.handleChangeName} 
+                  required
+                  />
 
               </div>
               <div class="w3-col l6 s6 m6">
@@ -141,8 +144,9 @@ class App extends React.Component {
                   name="Age"
                   type="text"
                   value={this.state.numberOfGuests}
-                  onChange={this.handleChangeAge} required/>
-
+                  onChange={this.handleChangeAge} 
+                  required
+                  />
               </div>
             </div>
             <br />
@@ -164,9 +168,10 @@ class App extends React.Component {
                 />
               </div>
             </div>
+            </form>
             <br />
             <div class="w3-row">
-              <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" onClick={this.submit}>{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
+              <button class="w3-highway-red w3-round-xxlarge nav-button w3-large w3-button w3-hover-red" type="submit">{this.state.serviceWait ? <FontAwesomeIcon spin icon={faSpinner} /> : 'Create'}</button>
             </div>
           </div>
 
