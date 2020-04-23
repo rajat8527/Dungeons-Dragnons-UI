@@ -123,7 +123,7 @@ class App extends React.Component {
                 <h3>Customize Your D&amp;D Character</h3>
               </div>
             </div>
-            <form onClick={this.submit}>
+            <form onSubmit={this.submit}>
             <div class="w3-row-padding">
               <div class="w3-col l6 s6 m6">
 
