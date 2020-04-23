@@ -84,7 +84,7 @@ class App extends React.Component {
             if (res.code === 'ValidationFailed') {
               console.log(res.fieldMessages)
             } else {
-             this.setState.errorMessage({errorMessage: 'all fields are required, please check if you missed any !'});
+             this.setState({errorMessage: 'all fields are required, please check if you missed any !'});
               console.log('this is a client (probably invalid JSON) error, but also might be a server error (bad JSON parsing/validation)')
             }
             break
