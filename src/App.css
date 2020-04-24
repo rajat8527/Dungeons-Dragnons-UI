@@ -1,7 +1,10 @@
 .App {
   text-align: center;
 }
-
+.fa-spin {
+  -webkit-animation: fa-spin 0.75s infinite linear !important;
+  animation: fa-spin 0.75s infinite linear !important;
+ }
 
 .App-logo {
   height: 40vmin;
