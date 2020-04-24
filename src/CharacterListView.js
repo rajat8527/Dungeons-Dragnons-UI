@@ -56,10 +56,7 @@ class CharacterListView extends React.Component {
           data: newData
         });
       } else {
-        this.setState({
-          data: newData,
-          flag: true
-        });
+        this.setState({flag: true });
         console.log("deleted successfully..")
       }
     })
