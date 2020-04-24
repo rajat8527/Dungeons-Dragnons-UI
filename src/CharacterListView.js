@@ -40,7 +40,7 @@ class CharacterListView extends React.Component {
   deleteCharacterById(id){
     var newData = this.state.data
     this.setState({
-      data: newData.filter(x => x._id !== id),
+      data: newData.filter(x => x._id !== id).reverse(),
     });
     this.setState({ loadDeleteById: true })
     fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+id, {
