@@ -38,7 +38,7 @@ class CharacterListView extends React.Component {
   }
 
   deleteCharacterById(id){
-    var newData = this.state.data.reverse()
+    var newData = this.state.data
     this.setState({
       data: newData.filter(x => x._id !== id)
     });
