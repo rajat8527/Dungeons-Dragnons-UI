@@ -78,7 +78,7 @@ class CharacterListView extends React.Component {
         this.setState({ data: response })
       }
       else {
-        this.setState({ data: response, flag: true })
+        this.setState({ data: [], flag: true })
       }
 
     })
