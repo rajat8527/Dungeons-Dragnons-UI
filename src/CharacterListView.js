@@ -37,20 +37,28 @@ class CharacterListView extends React.Component {
       });
   }
 
-  deleteCharacterById(_id, index){
-
+  deleteCharacterById(id){
     var newData = this.state.data
-    newData.splice(index,1)
+    this.setState({
+      data: newData.filter(x => x._id !== id),
+    });
     this.setState({ loadDeleteById: true })
-    fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+_id, {
+    fetch(this.baseUrl + 'https://rakuten-dnd-character-app.herokuapp.com/api/deleteCharacterById/'+id, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
         'Origin': 'https://rakuten-dnd-ui.herokuapp.com'
       },
+    }).then(response => {
+      if (response.status === 'error') {
+        this.setState({
+          data: newData
+        });
+      } else {
+        console.log("deleted successfully..")
+      }
     })
-      .then(() => this.setState({data:newData,flag:true}))
       .catch((error) => {
         this.setState({ loadDeleteById: false })
         console.error('Error:', error);
