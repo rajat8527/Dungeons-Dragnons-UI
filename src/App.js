@@ -19,8 +19,7 @@ class App extends React.Component {
       buttonFlag:false,
       serviceWait: false,
       showDetail: false,
-      errorMessage: '',
-      hasError: true
+      errorMessage: ''
     }
   }
   handleChangeClasses = selectedOption => {
