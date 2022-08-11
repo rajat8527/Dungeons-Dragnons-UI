@@ -1,6 +1,6 @@
 # Dungeons & Dragons - React UI
 
-It's a small application based on Dungeons & Dragons where you can manage (view, edit, delete) characters. The application was developed using React.
+It's a small application based on Dungeons & Dragons where you can manage (view, edit, delete) characters. The application was developed using React. This project is dependent upon Dungeons-Dragons-Backend project as it provides the REST API support to this applicaiton.
 
 ## Available Scripts
 
